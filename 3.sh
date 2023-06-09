@@ -112,7 +112,7 @@ git commit -m --allow-empty
 git push
 git push origin HEAD -f
 gitCommit=`git rev-parse HEAD`
-linkGit=`echo https://raw.githubusercontent.com/binhvmodev/dev/`$gitCommit`echo /`
+linkGit=`echo https://raw.githubusercontent.com/thaibinhdev/dev/`$gitCommit`echo /`
 linkApi=`echo https://script.google.com/macros/s/AKfycbxp8fzQHBv3QNAhd7fWRzjCmCHrnq_cR6OYV9w_B0vmPuzJWefQpO0DhEZNADrKNGA/exec?`
 linkPost=$linkApi`echo LinkID==IMPORTDATA\(\"`$linkGit`echo wm-MA-usItemId.txt\"\)\
 \&GiaHienTai==IMPORTDATA\(\"`$linkGit`echo wm-MA-currentPrice.txt\"\)\
