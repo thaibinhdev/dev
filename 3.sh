@@ -1,13 +1,13 @@
 #!/bin/bash
 # eval `ssh-agent -s`
 git pull
-: > wm-MA-usItemId.txt
-: > wm-MA-currentPrice.txt
-: > wm-MA-wasPrice.txt
-: > wm-MA-availabilityStatus.txt
-: > wm-MA-orderLimit.txt
+: > wm-3-usItemId.txt
+: > wm-3-currentPrice.txt
+: > wm-3-wasPrice.txt
+: > wm-3-availabilityStatus.txt
+: > wm-3-orderLimit.txt
 
-# curl -C - -Ls https://script.google.com/macros/s/AKfycbwEQEGzrFMLI-1xR8mzQ44U4Df-Q9WMaOnsoJYr8Xo1QN20WO8Vp1Ey5A4i2PCzLbqF/exec | jq '.content.names[]' | sed 's/"//g' | sed 's/.*\///g' > wm-MA-list.txt
+# curl -C - -Ls https://script.google.com/macros/s/AKfycbwEQEGzrFMLI-1xR8mzQ44U4Df-Q9WMaOnsoJYr8Xo1QN20WO8Vp1Ey5A4i2PCzLbqF/exec | jq '.content.names[]' | sed 's/"//g' | sed 's/.*\///g' > wm-3-list.txt
 
 
 while read line
@@ -91,21 +91,21 @@ do
         echo 'Thoát script'
         exit 1
       else
-        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.usItemId' >> wm-MA-usItemId.txt
-        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.usItemId' >> wm-MA-usItemId.txt
-        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.currentPrice.price' >> wm-MA-currentPrice.txt
-        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.currentPrice.price' >> wm-MA-currentPrice.txt
-        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.wasPrice.price' | sed 's/null//g' >> wm-MA-wasPrice.txt
-        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.wasPrice.price' | sed 's/null//g' >> wm-MA-wasPrice.txt
-        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.availabilityStatus' >> wm-MA-availabilityStatus.txt
-        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.availabilityStatus' >> wm-MA-availabilityStatus.txt
-        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.orderLimit' >> wm-MA-orderLimit.txt
-        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.orderLimit' >> wm-MA-orderLimit.txt
+        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.usItemId' >> wm-3-usItemId.txt
+        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.usItemId' >> wm-3-usItemId.txt
+        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.currentPrice.price' >> wm-3-currentPrice.txt
+        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.currentPrice.price' >> wm-3-currentPrice.txt
+        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.wasPrice.price' | sed 's/null//g' >> wm-3-wasPrice.txt
+        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.priceInfo.wasPrice.price' | sed 's/null//g' >> wm-3-wasPrice.txt
+        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.availabilityStatus' >> wm-3-availabilityStatus.txt
+        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.availabilityStatus' >> wm-3-availabilityStatus.txt
+        echo $list | jq '.data.shoppingListDetails.items.listItems[].product.orderLimit' >> wm-3-orderLimit.txt
+        echo $list2 | jq '.data.shoppingListDetails.items.listItems[].product.orderLimit' >> wm-3-orderLimit.txt
         echo ${line[0]}
         break
     fi
   done
-done < wm-MA-list.txt
+done < wm-3-list.txt
 
 git add -A .
 git commit -m --allow-empty
@@ -114,10 +114,10 @@ git push origin HEAD -f
 gitCommit=`git rev-parse HEAD`
 linkGit=`echo https://raw.githubusercontent.com/thaibinhdev/dev/`$gitCommit`echo /`
 linkApi=`echo https://script.google.com/macros/s/AKfycbxp8fzQHBv3QNAhd7fWRzjCmCHrnq_cR6OYV9w_B0vmPuzJWefQpO0DhEZNADrKNGA/exec?`
-linkPost=$linkApi`echo LinkID==IMPORTDATA\(\"`$linkGit`echo wm-MA-usItemId.txt\"\)\
-\&GiaHienTai==IMPORTDATA\(\"`$linkGit`echo wm-MA-currentPrice.txt\"\)\
-\&TrangThaiHang==IMPORTDATA\(\"`$linkGit`echo wm-MA-availabilityStatus.txt\"\)\
-\&Quantity==IMPORTDATA\(\"`$linkGit`echo wm-MA-orderLimit.txt\"\)
+linkPost=$linkApi`echo LinkID==IMPORTDATA\(\"`$linkGit`echo wm-3-usItemId.txt\"\)\
+\&GiaHienTai==IMPORTDATA\(\"`$linkGit`echo wm-3-currentPrice.txt\"\)\
+\&TrangThaiHang==IMPORTDATA\(\"`$linkGit`echo wm-3-availabilityStatus.txt\"\)\
+\&Quantity==IMPORTDATA\(\"`$linkGit`echo wm-3-orderLimit.txt\"\)
 `
 echo '[InternetShortcut]\
 URL='$linkPost > 3.url
