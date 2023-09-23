@@ -117,4 +117,4 @@ linkPost=$linkApi`echo LinkID==IMPORTDATA\(\"`$linkGit`echo 1-usItemId.txt\"\)\
 `
 echo '[InternetShortcut]\
 URL='$linkPost > 1.url
-open 1.url
+open -a "Microsoft Edge" 1.url
